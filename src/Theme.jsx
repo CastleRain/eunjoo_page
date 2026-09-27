@@ -9,7 +9,7 @@ export function ClinicTheme({font,motion,children}) {
  const compact=font<=16;
  return <ConfigProvider locale={koKR} componentSize="large" theme={{
   token:{
-   colorPrimary:design.accent,colorInfo:'#59748e',colorSuccess:'#60726b',colorWarning:'#9a702a',colorError:'#ad4e59',
+   colorPrimary:design.accent,colorPrimaryHover:design.accentHover,colorInfo:'#59748e',colorSuccess:'#60726b',colorWarning:'#9a702a',colorError:'#ad4e59',
    colorText:design.ink,colorTextSecondary:design.muted,colorBorder:design.line,colorBorderSecondary:design.line,
    colorBgContainer:'#ffffff',colorBgLayout:design.canvas,colorBgElevated:'#ffffff',colorFillAlter:design.softest,
    borderRadius:design.radius,fontFamily:'"Noto Sans KR Variable", sans-serif',fontSize:font,fontSizeLG:font,

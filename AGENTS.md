@@ -42,3 +42,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - User selected layout A and explicitly replaced the beige/brown direction with white + warm gray. Avoid yellowish surfaces; use neutral charcoal for main actions, retaining semantic status colors.
 - User requested a smaller, younger-feeling view as well as readable large-font modes. Default new users to compact 16px; retain existing saved preferences and 18/20/22px options. Compact mode adjusts spacing/table density as well as font size; large modes retain generous controls. Touch targets must remain usable.
 - Proceed with Phase 4 on feature/ui-redesign-warm-gray from option A. Apply shared presentation consistently across all menus, preserve business behavior, and wait for review before any main merge/push/deployment.
+
+## Soft brown refinement, 2026-09-27
+- Latest user direction supersedes the warm-gray/charcoal palette: keep A layout and return to a lighter, softer brown for a clinic atmosphere. Keep white surfaces and avoid an overall yellow cast; use pale brown selected areas and restrained brown actions.
+- Preserve compact 16px and existing 18/20/22px display preferences and density behavior. This update changes the shared color theme only; main merge/publishing still requires explicit authorization.
