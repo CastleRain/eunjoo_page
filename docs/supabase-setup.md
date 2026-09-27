@@ -4,7 +4,7 @@
 
 `?mode=live`에서 Supabase Auth 이메일/비밀번호 로그인과 실제 저장되는 직원·휴가 화면을 제공합니다. 기존 기본 주소 및 `?mode=demo#today`는 가상 데이터 시안이며 자동 시연도 이쪽에서만 동작합니다. 다른 CRM·재고 메뉴의 DB 연결은 아직 없습니다. `server/`의 NestJS/Prisma는 향후 용도로 남겨두었으며 Supabase 기능에서 사용하지 않습니다.
 
-프로젝트: `ondam-workspace` (`jjxgyuhwlflhnhxragsn`, Seoul). 2026-09-27 SQL Editor로 `supabase/migrations/202609270001_leave.sql`을 적용했습니다. 원격의 3개 업무 테이블에 RLS가 켜졌으며 `authenticated`의 직접 SELECT 권한은 없는 것을 확인했습니다. 실제 앱 계정 생성 및 두 계정의 브라우저 통합 검증/공개 배포는 별도 완료 확인이 필요합니다.
+프로젝트: `ondam-workspace` (`jjxgyuhwlflhnhxragsn`, Seoul). 2026-09-27 SQL Editor로 `supabase/migrations/202609270001_leave.sql`을 적용했습니다. 원격의 3개 업무 테이블에 RLS가 켜졌으며 `authenticated`의 직접 SELECT 권한은 없는 것을 확인했습니다. 대표 테스트 계정 생성 및 OWNER 프로필 연결을 완료했습니다. 로컬 앱에서 실제 Supabase 로그인, 신청 저장, 새로고침 유지, 승인/달력 반영, 취소 요청 중 달력 유지, 취소 승인 흐름을 확인했습니다. 직원 계정과의 교차 역할 브라우저 검증 및 공개 배포는 아직 남아 있습니다.
 
 ## 연결 및 배포
 
@@ -43,4 +43,4 @@ values ('AUTH_USERS에서_복사한_UUID'::uuid, '한승재', 'OWNER');
 
 - TypeScript, 기존 테스트 10개, 프로덕션 빌드 통과.
 - PostgreSQL 실행 테스트: 비로그인/비활성/미등록 계정 차단, 직원의 직접 테이블 접근 및 자기 권한 변경 차단, 타인 신청 조회·수정 차단, 대표 전용 승인, 일수/반차, 중복 요청, 겹침, 오래된 승인 요청, 취소/반려/달력 및 개인정보 제외 검증.
-- 실제 Auth 로그인/공유 세션 테스트는 사용자 생성 후 진행합니다. 로컬 SQL 검증은 Supabase Auth 서버 전체의 통합 테스트를 대체하지 않습니다.
+- 실제 Supabase Auth 대표 로그인 및 DB 신청·승인·취소 흐름을 브라우저에서 확인했습니다. 확인용 1건은 사유에 테스트임을 표시했으며 최종 취소 처리하여 달력에서 제외했습니다. 직원 계정의 별도 브라우저 검증은 추가 계정 생성 후 진행합니다.
