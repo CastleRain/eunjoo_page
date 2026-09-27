@@ -46,3 +46,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Soft brown refinement, 2026-09-27
 - Latest user direction supersedes the warm-gray/charcoal palette: keep A layout and return to a lighter, softer brown for a clinic atmosphere. Keep white surfaces and avoid an overall yellow cast; use pale brown selected areas and restrained brown actions.
 - Preserve compact 16px and existing 18/20/22px display preferences and density behavior. This update changes the shared color theme only; main merge/publishing still requires explicit authorization.
+
+## Implementation approval and policy, 2026-09-27
+- User approved proceeding after the proposed next step of finalizing the soft-brown design and updating the deployed main app. Main merge/push for this reviewed redesign is now authorized.
+- Production authorization has two roles only: OWNER (representative/한승재) and STAFF. Desk/dispensing labels in the prototype are staff job examples, not separate production permission levels.
+- Staff handle herb intake and material reservation. OWNER can also perform these operations. Owner business/finance views and leave decisions remain OWNER-only.
+- Keep the current leave calculation: inclusive start/end calendar dates, including weekends and public holidays; morning/afternoon half-day is 0.5. Do not silently switch to business-day calculations. Retain approval/cancellation/calendar privacy rules.
+- Proceed incrementally toward TypeScript and the planned NestJS/PostgreSQL/Prisma backend. Keep the publicly deployed prototype operational and clearly distinguish connected features from backend groundwork.
