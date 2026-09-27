@@ -1,6 +1,6 @@
 import {Button as UIButton,Switch,Checkbox,Radio} from 'antd';
 import React,{useState,useRef,useEffect} from 'react';
-import {TextAa,Check,Users,MagnifyingGlass,CaretRight,FileText,Package,ClipboardText,Printer,CheckCircle,X} from '@phosphor-icons/react';
+import {TextAa,Check,Users,MagnifyingGlass,CaretRight,FileText,Package,ClipboardText,Printer,CheckCircle,X} from './icons';
 import {useApp,Badge,Btn,Empty,Tabs,Search,Field,Notice,KV,Modal} from './ui';
 import {menus} from './data';
 import {HerbRegistration} from './HerbRegistration';

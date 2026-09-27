@@ -1,5 +1,5 @@
 import React,{createContext,useContext,useEffect,useRef,useId} from 'react';
-import {MagnifyingGlass,X,Warning} from '@phosphor-icons/react';
+import {MagnifyingGlass,X,Warning} from './icons';
 import {Button,Input,Select,DatePicker,Segmented,Tag,Alert,Card,Table,Calendar as AntCalendar,Empty as AntEmpty,Drawer,Modal as AntModal} from 'antd';
 import dayjs from 'dayjs';
 export const Ctx=createContext(null); export const useApp=()=>useContext(Ctx);

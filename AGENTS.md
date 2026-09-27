@@ -30,3 +30,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Public repository: CastleRain/eunjoo_page. Publish the frontend to GitHub Pages using .github/workflows/deploy.yml on main. Respect the /eunjoo_page/ base path, including downloadable public files.
 - The original layout is archived in .local-backup/original-layout-2026-09-27.tar.gz and must remain excluded from Git.
 - First publish the existing prototype; backend implementation is a subsequent phase. Keep the distinction between implemented React/Ant Design UI and planned authentication, APIs and database explicit.
+
+## Approved redesign brief, 2026-09-27
+- Follow the user's UI redesign template approval gates. Phase 0 brief and Phase 1 libraries are approved; the three implemented representative options must be presented for selection before expanding to all screens.
+- Preserve all business state, data, callbacks, routes, role restrictions, and automatic walkthrough behavior. Scope the options to Today and Stock (including registration/intake), plus their shared shell and controls.
+- Light mode only for these options, white/pale beige with warm brown accents. Preserve 18/20/22px controls and reduced motion.
+- Approved libraries: existing Ant Design 6.6.5 theme and components, Lucide React 1.48.0, Motion 13.4.4, Fontsource Noto Sans KR Variable 5.3.0.
+- Make three actual, independently committed option branches from pre-redesign-20260927. No main commit/merge/push until explicitly authorized. Do not change backend or hosting integration.

@@ -1,6 +1,6 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {Button,Select,Progress,Modal as AntModal} from 'antd';
-import {Play,Pause,SkipForward,Stop,Presentation,CheckCircle} from '@phosphor-icons/react';
+import {Play,Pause,SkipForward,Stop,Presentation,CheckCircle} from './icons';
 import {useApp,Notice} from './ui';
 import {demoChapters} from './demo-script.mjs';
 
