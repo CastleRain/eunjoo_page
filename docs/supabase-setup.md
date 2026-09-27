@@ -2,7 +2,7 @@
 
 ## 구현 범위
 
-`?mode=live`에서 Supabase Auth 이메일/비밀번호 로그인과 실제 저장되는 직원·휴가 화면을 제공합니다. 기존 기본 주소 및 `?mode=demo#today`는 가상 데이터 시안이며 자동 시연도 이쪽에서만 동작합니다. 다른 CRM·재고 메뉴의 DB 연결은 아직 없습니다. `server/`의 NestJS/Prisma는 향후 용도로 남겨두었으며 Supabase 기능에서 사용하지 않습니다.
+`?mode=live`에서 Supabase Auth 이메일/비밀번호 로그인과 실제 저장되는 직원·휴가 화면을 제공합니다. 기본 주소도 로그인 화면으로 시작합니다. `?mode=demo#today`의 가상 데이터 시안 역시 로그인 및 활성 직원 등록을 확인한 뒤 열리며, 대표에게만 역할 전환/자동 시연을 제공합니다. 다른 CRM·재고 메뉴의 DB 연결은 아직 없습니다. `server/`의 NestJS/Prisma는 향후 용도로 남겨두었으며 Supabase 기능에서 사용하지 않습니다.
 
 프로젝트: `ondam-workspace` (`jjxgyuhwlflhnhxragsn`, Seoul). 2026-09-27 SQL Editor로 `supabase/migrations/202609270001_leave.sql`을 적용했습니다. 원격의 3개 업무 테이블에 RLS가 켜졌으며 `authenticated`의 직접 SELECT 권한은 없는 것을 확인했습니다. 대표 테스트 계정 생성 및 OWNER 프로필 연결을 완료했습니다. 로컬 앱에서 실제 Supabase 로그인, 신청 저장, 새로고침 유지, 승인/달력 반영, 취소 요청 중 달력 유지, 취소 승인 흐름을 확인했습니다. 직원 테스트 계정 3개도 등록했습니다. 직원 신청 → 대표 승인 → 다른 직원 달력 공유 및 타인 사유/상세 비노출을 브라우저에서 확인했습니다.
 
@@ -10,13 +10,13 @@
 
 - `.env.example`을 기준으로 로컬 `.env.local`에 URL과 **Publishable key**만 설정합니다. secret/service_role 키는 사용하지 않습니다.
 - 이 저장소의 GitHub Repository Variables는 등록 완료했습니다. 다른 환경에서는 `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`를 설정합니다. 두 값은 브라우저에 공개되는 설정입니다.
-- Pages 빌드에 이 변수를 주입합니다. 로그인 주소는 `https://castlerain.github.io/eunjoo_page/?mode=live`입니다. 이 URL은 main의 GitHub Pages 배포 완료 후 사용할 수 있습니다.
+- Pages 빌드에 이 변수를 주입합니다. 로그인 주소는 `https://castlerain.github.io/eunjoo_page/?mode=live`입니다. 기본 주소에서도 동일한 로그인 화면으로 진입합니다.
 - 기존 DB에는 초기 migration을 재실행하지 않습니다. 후속 변경은 새 migration 파일로 관리합니다.
 - Docker가 실행 중인 환경에서 `npm run test:supabase`는 외부 포트를 열지 않는 임시 PostgreSQL 17 컨테이너를 생성하고 테스트 후 삭제합니다. `bootstrap.sql`은 로컬의 Auth 모형 전용이며 실제 Supabase에 적용하지 않습니다.
 
 ## 첫 계정 등록
 
-1. Supabase Authentication → Users → Add user → Create new user에서 사용자가 이메일과 비밀번호를 직접 입력합니다. 테스트용으로 이메일 확인을 자동 처리하는 옵션을 선택할 수 있습니다. 이메일 초대 발송은 별도 사용자 요청 없이 하지 않습니다.
+1. Supabase Authentication → Users → Add user → Create new user에서 승인된 이메일과 비밀번호로 등록합니다. 테스트용으로 이메일 확인을 자동 처리하는 옵션을 선택할 수 있습니다. 이메일 초대 발송은 별도 사용자 요청 없이 하지 않습니다.
 2. 생성한 사용자의 UID를 확인합니다. Supabase 대시보드 로그인과 업무실 로그인은 서로 다른 계정입니다.
 3. SQL Editor에서 아래 SQL의 UID·이름·역할을 실제 승인된 값으로 바꾸어 한 번 실행합니다. 원장은 `한승재`, `OWNER`; 직원은 본인 이름, `STAFF`입니다. UUID를 임의 생성하거나 가입 메타데이터로 OWNER를 부여하지 않습니다.
 
@@ -25,7 +25,7 @@ insert into ondam.profiles (id, display_name, role)
 values ('AUTH_USERS에서_복사한_UUID'::uuid, '한승재', 'OWNER');
 ```
 
-4. 사용자 본인이 웹 로그인 화면에 비밀번호를 입력하여 로그인합니다. Auth 사용자만 만들고 profile을 등록하지 않으면 업무 데이터에 접근할 수 없습니다.
+4. 웹 로그인 화면에서 계정으로 로그인합니다. Auth 사용자만 만들고 profile을 등록하지 않으면 업무 데이터에 접근할 수 없습니다.
 5. 직원 계정도 생성하고 `STAFF` profile을 등록합니다. 두 브라우저/세션에서 신청 → 대표 승인 → 직원 새로고침 → 달력 반영을 확인합니다. 같은 브라우저의 일반 탭끼리는 로그인 상태가 공유됩니다. 역할별 테스트는 각각 로그아웃/로그인하거나 별도 프로필/브라우저를 이용합니다.
 
 ## 권한과 데이터 처리
@@ -48,3 +48,9 @@ values ('AUTH_USERS에서_복사한_UUID'::uuid, '한승재', 'OWNER');
 ## 테스터 접속 방법
 
 Supabase 관리자 화면을 공유하지 않고 `https://castlerain.github.io/eunjoo_page/?mode=live`를 전달합니다. 설치 없이 PC/휴대폰 브라우저에서 로그인할 수 있습니다. 대표는 승인 대기함/전체 신청 내역을, 직원은 본인 신청 내역과 공용 달력을 사용합니다. 신청 이후 다른 사용자의 화면은 최대 20초 안에 갱신되며 새로고침으로 즉시 확인할 수 있습니다. 비밀번호는 소스·문서·배포 파일에 저장하지 않습니다.
+
+## 로그인 필수 접근
+
+모든 앱 진입점은 공통 로그인 게이트를 거칩니다. 익명 사용자는 시안 주소나 hash를 직접 입력해도 업무 UI를 볼 수 없습니다. Supabase RPC로 활성 직원 등록을 확인하기 전에는 보호된 화면을 렌더링하지 않습니다. 로그아웃/인증 실패 시 업무 화면을 제거합니다. 직원은 시안에서도 원장 역할로 전환할 수 없고 원장 경영이 제한됩니다.
+
+GitHub Pages의 정적 JS/CSS 자체는 공개 파일이며, 실제 업무 데이터 보호는 Supabase의 인증·기본 거부 테이블 권한·서버 RPC 검사로 강제합니다. 시안에는 가상 데이터만 넣습니다.

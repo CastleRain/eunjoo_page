@@ -8,6 +8,8 @@ import {cloud,cloudConfigured,loadWorkspace,submitLeave,transitionLeave,friendly
 import type {Workspace,LeaveRequest,LeaveAction} from './api';
 import './cloud.css';
 const demoUrl=location.pathname+'?mode=demo#today';
+const DemoApp=React.lazy(()=>import('../App.jsx').then(module=>({default:module.App})));
+const demoMode=new URLSearchParams(location.search).get('mode')==='demo';
 
 export function CloudApp(){
  const [font,setFont]=useState(()=>[16,18,20,22].includes(Number(localStorage.getItem('ondam-font')))?Number(localStorage.getItem('ondam-font')):16);
@@ -24,10 +26,11 @@ function CloudSession({font,setFont}:{font:number;setFont:(n:number)=>void}){
   return()=>{mounted=false;subscription.unsubscribe()};
  },[]);
  async function logout(){const {error}=await cloud!.auth.signOut({scope:'local'});if(error)setAuthError('로그아웃에 실패했습니다. 다시 시도해 주세요.')}
+ if(ready&&session&&demoMode)return <LeaveWorkspace key={session.user.id} session={session} demo onLogout={logout}/>;
  return <div className="cloud-app">
-  <header className="cloud-header"><a className="cloud-brand" href={location.pathname+'?mode=live'}>온담 업무실</a><Tag>공동 테스트</Tag><div className="cloud-header-actions"><Select aria-label="글자 크기" value={font} onChange={setFont} options={[16,18,20,22].map(value=>({value,label:value+'px'}))}/><Button href={demoUrl}>전체 시안 보기</Button>{session&&<Button onClick={logout}>로그아웃</Button>}</div></header>
+  <header className="cloud-header"><a className="cloud-brand" href={location.pathname+'?mode=live'}>온담 업무실</a><Tag>공동 테스트</Tag><div className="cloud-header-actions"><Select aria-label="글자 크기" value={font} onChange={setFont} options={[16,18,20,22].map(value=>({value,label:value+'px'}))}/>{session&&<Button href={demoUrl}>전체 시안 보기</Button>}{session&&<Button onClick={logout}>로그아웃</Button>}</div></header>
   {authError&&<Alert type="error" title={authError}/>}
-  {!cloudConfigured?<Card className="cloud-login"><Typography.Title level={2}>연결 준비 중입니다</Typography.Title><p>공동 테스트 연결 설정이 아직 준비되지 않았습니다. 기존 시안은 계속 둘러볼 수 있습니다.</p><Button href={demoUrl}>시안 보기</Button></Card>:!ready?<div className="cloud-loading"><Spin/><p>로그인 상태를 확인하고 있습니다.</p></div>:!session?<Login/>:<LeaveWorkspace key={session.user.id} session={session}/>}
+  {!cloudConfigured?<Card className="cloud-login"><Typography.Title level={2}>연결 준비 중입니다</Typography.Title><p>로그인 연결 설정이 준비되지 않아 업무 화면을 열 수 없습니다. 관리자에게 문의해 주세요.</p></Card>:!ready?<div className="cloud-loading"><Spin/><p>로그인 상태를 확인하고 있습니다.</p></div>:!session?<Login/>:<LeaveWorkspace key={session.user.id} session={session} onLogout={logout}/>}
  </div>
 }
 function Login(){
@@ -36,14 +39,15 @@ function Login(){
  return <Card className="cloud-login"><span className="section-eyebrow">우리 한의원의 하루</span><Typography.Title level={2}>직원 계정으로 로그인</Typography.Title><p className="muted">휴가를 신청하고 승인된 일정을 함께 확인하세요.</p>
  <Form layout="vertical" onFinish={login} requiredMark={false}><Form.Item label="이메일" name="email" rules={[{required:true,message:'이메일을 입력해 주세요.'},{type:'email',message:'이메일 형식을 확인해 주세요.'}]}><Input autoComplete="username" type="email"/></Form.Item><Form.Item label="비밀번호" name="password" rules={[{required:true,message:'비밀번호를 입력해 주세요.'}]}><Input.Password autoComplete="current-password"/></Form.Item>{error&&<Alert role="alert" type="error" title={error}/>}<Button type="primary" htmlType="submit" loading={busy} block>로그인</Button></Form><p className="muted">계정이 없거나 비밀번호를 잊었다면 관리자에게 문의해 주세요.</p></Card>
 }
-function LeaveWorkspace({session}:{session:Session}){
+function LeaveWorkspace({session,demo=false,onLogout}:{session:Session;demo?:boolean;onLogout:()=>Promise<void>}){
  const {message}=AntApp.useApp();
  const [month,setMonth]=useState(()=>dayjs().startOf('month')),[data,setData]=useState<Workspace|null>(null),[error,setError]=useState(''),[loading,setLoading]=useState(true),[tab,setTab]=useState('달력'),[requestOpen,setRequestOpen]=useState(false),[selected,setSelected]=useState<LeaveRequest|null>(null);
  const sequence=useRef(0);
  const from=month.startOf('month').subtract(7,'day').format('YYYY-MM-DD'),to=month.endOf('month').add(7,'day').format('YYYY-MM-DD');
  const refresh=useCallback(async()=>{const ticket=++sequence.current;setLoading(true);try{const next=await loadWorkspace(from,to);if(ticket===sequence.current){setData(next);setError('')}}catch(e){if(ticket===sequence.current){setData(null);setSelected(null);setError(friendlyError(e))}}finally{if(ticket===sequence.current)setLoading(false)}},[from,to]);
  useEffect(()=>{void refresh();const timer=setInterval(()=>{if(document.visibilityState==='visible')void refresh()},20000);const focus=()=>void refresh();window.addEventListener('focus',focus);return()=>{++sequence.current;clearInterval(timer);window.removeEventListener('focus',focus)}},[refresh,session.access_token]);
- if(!data)return <main className="cloud-main">{error?<Alert type="error" title={error} action={<Button onClick={refresh}>다시 확인</Button>}/>:<div className="cloud-loading"><Spin/><p>업무 일정을 불러오고 있습니다.</p></div>}</main>;
+ if(!data)return <main className="cloud-main">{error?<Alert type="error" title={error} action={<Space><Button onClick={refresh}>다시 확인</Button><Button onClick={onLogout}>로그아웃</Button></Space>}/>:<div className="cloud-loading"><Spin/><p>업무 일정을 불러오고 있습니다.</p></div>}</main>;
+ if(demo)return <React.Suspense fallback={<div className="cloud-loading"><Spin/><p>시안을 불러오고 있습니다.</p></div>}><DemoApp account={data.profile} onLogout={onLogout}/></React.Suspense>;
  const owner=data.profile.role==='OWNER';
  const rows=tab==='승인 대기함'?data.requests.filter(r=>['PENDING','CANCEL_PENDING'].includes(r.status)):data.requests;
  const detail=selected?data.requests.find(r=>r.id===selected.id):null;

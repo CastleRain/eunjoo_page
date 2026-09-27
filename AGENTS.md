@@ -71,3 +71,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Added ?mode=live for Supabase login/persisted leave and kept the default prototype as demo. Local public config is ignored in .env.local. No secret/service-role key is used.
 - SQL integration tests run in a disposable Docker PostgreSQL container: npm run test:supabase. Bootstrap fixture files must never be applied to the hosted project.
 - Owner test account and 한승재 OWNER profile are connected. Verified actual login and persisted request → approval → calendar → cancellation through the local UI. The labelled test request was cancelled and its audit history retained. Three user-requested STAFF test accounts are provisioned; all three logins and cross-role leave sharing/privacy are verified in the browser. Never treat dashboard login as an app account or infer OWNER from client metadata. Shared tester access is prepared. Automatic approval review rejected main merge/push/deployment on 2026-09-27 because the latest question did not explicitly authorize public deployment. Deployment awaits explicit approval; do not push or deploy until granted.
+
+## Login requirement and release approval, 2026-09-27
+- User explicitly approved deployment (main merge, push and GitHub Pages) after the previous automatic approval block.
+- Every entry point, including default URL, ?mode=live, ?mode=demo and hash routes, must require login and active server-verified membership before showing app content. No anonymous demo or configuration-fallback bypass.
+- Staff remain STAFF in the prototype too; no owner-role switch or owner walkthrough is exposed to staff. Preserve owner preview controls.

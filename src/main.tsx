@@ -1,6 +1,5 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "./App.jsx";
 import { CloudApp } from "./cloud/CloudApp";
 import "./styles.css";
 import "./redesign.css";
@@ -12,6 +11,6 @@ const root = document.getElementById("root");
 if (!root) throw new Error("앱을 표시할 root 요소가 없습니다.");
 createRoot(root).render(
   <React.StrictMode>
-    <>{new URLSearchParams(location.search).get("mode")==="live" ? <CloudApp /> : <App />}</>
+    <CloudApp />
   </React.StrictMode>,
 );
