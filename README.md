@@ -8,7 +8,7 @@
 
 ## 현재 구현
 
-React 19 + Vite + Ant Design 6 + Day.js를 사용합니다. Pretendard 글꼴과 Phosphor 아이콘을 포함합니다. 공용 UI는 `src/ui.jsx`, 테마는 `src/Theme.jsx`에서 관리합니다.
+React 19 + Vite + Ant Design 6 + Day.js를 사용합니다. Noto Sans KR Variable, Lucide 아이콘, Motion을 포함합니다. 공용 UI는 `src/ui.jsx`, 테마는 `src/Theme.jsx`, 공통 색상은 `src/design-config.js`에서 관리합니다. 확정된 A 레이아웃에 흰색·연한 갈색을 적용했습니다.
 
 현재는 가상 데이터로 동작하는 프론트엔드 시안입니다. 실제 로그인, 서버 권한, DB, 결제, 메시지 발송은 구현하지 않았습니다. 업무 데이터는 새로고침 시 초기화되고 화면 설정만 브라우저에 저장됩니다.
 
@@ -65,7 +65,7 @@ npm run preview -- --host 127.0.0.1 --port 4173
 
 ## 추천 체험 순서
 
-1. 상단 **글자·화면**에서 18/20/22px 비교.
+1. 상단 **글자·화면**에서 16px 컴팩트 및 18/20/22px 비교.
 2. **초안 이어쓰기**에서 약재와 재고 비교.
 3. **직원·휴가 → 직원 신청 체험**에서 휴가 신청.
 4. 왼쪽 아래 **시연 역할 → 원장**으로 전환.

@@ -18,7 +18,7 @@ export function HerbRegistration(){
     a.notify(`${cleanName}을 새 약재로 등록했어요.${intake?' 이제 입고 수량을 입력해 주세요.':''}`);
     if(intake)a.open({type:'intake',name:cleanName});else a.close();
   };
-  return <form onSubmit={submit}>
+  return <form className="herb-registration" onSubmit={submit}>
     <p className="lead">처방과 재고에서 사용할 약재를 추가합니다.</p>
     <Field label="약재명"><input required maxLength={60} value={name} onChange={e=>{setName(e.target.value);setError('')}} placeholder="예: 백출"/></Field>
     <Field label="공급처 (선택)"><input maxLength={80} value={supplier} onChange={e=>setSupplier(e.target.value)} placeholder="예: 온담 약업"/></Field>

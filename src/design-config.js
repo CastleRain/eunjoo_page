@@ -1,0 +1,30 @@
+export const design = {
+  "id": "a",
+  "label": "A · 소프트 브라운",
+  "accent": "#887260",
+  "accentHover": "#78614f",
+  "canvas": "#fcfbfa",
+  "radius": 10,
+  "ink": "#302c29",
+  "muted": "#746d67",
+  "line": "#e8e2dc",
+  "soft": "#f4eee9",
+  "softest": "#faf7f4",
+  "css": {
+    "--accent": "#887260",
+    "--accent-hover": "#78614f",
+    "--canvas": "#fcfbfa",
+    "--nav-bg": "#ffffff",
+    "--line": "#e8e2dc",
+    "--soft": "#f4eee9",
+    "--softest": "#faf7f4",
+    "--active-bg": "#eee5dd",
+    "--radius": "10px",
+    "--card-radius": "16px",
+    "--ink": "#302c29",
+    "--muted": "#746d67",
+    "--subtle": "#8a8179",
+    "--overlay": "rgba(48,44,41,.22)",
+    "--focus-ring": "rgba(136,114,96,.15)"
+  }
+};

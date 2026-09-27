@@ -1,7 +1,7 @@
 import {Button as UIButton} from 'antd';
 import {calculateLeaveDays} from './leave-days.mjs';
 import React,{useState,useEffect} from 'react';
-import {CalendarBlank,Plus,CaretLeft,CaretRight,Check,Users,Lock} from '@phosphor-icons/react';
+import {CalendarBlank,Plus,CaretLeft,CaretRight,Check,Users,Lock} from './icons';
 import {useApp,PageTitle,Panel,Tabs,Btn,Badge,Notice,Field,KV,Empty,Modal,MonthCalendar} from './ui';
 export const initialLeaves=[{id:'L101',employee:'직원 A',job:'데스크',type:'연차',start:'2026-09-29',end:'2026-09-29',days:1,note:'개인 일정',handoff:'직원 C에게 오전 접수 업무 인계 예정',state:'승인 대기',submitted:'2026.09.25',history:['09.25 · 직원 A 신청']},{id:'L102',employee:'직원 B',job:'조제',type:'오후 반차',start:'2026-09-30',end:'2026-09-30',days:.5,note:'개인 일정',handoff:'오전 중 탕전 준비 완료',state:'승인 완료',submitted:'2026.09.24',history:['09.24 · 직원 B 신청','09.24 · 원장 승인']},{id:'L103',employee:'직원 C',job:'파트타임',type:'연차',start:'2026-10-02',end:'2026-10-02',days:1,note:'개인 일정',handoff:'직원 A와 근무 조정',state:'승인 대기',submitted:'2026.09.25',history:['09.25 · 직원 C 신청']}];
 const calendarVisible=x=>['승인 완료','취소 요청'].includes(x.state);
