@@ -1,8 +1,31 @@
 import React from 'react';
-import {design} from './design-config';
 import {ConfigProvider} from 'antd';
 import koKR from 'antd/locale/ko_KR';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import {design} from './design-config';
 dayjs.locale('ko');
-export function ClinicTheme({font,motion,children}){return <ConfigProvider locale={koKR} componentSize="large" theme={{token:{colorPrimary:design.accent,colorInfo:'#687b98',colorSuccess:'#897454',colorWarning:'#ad7e45',colorError:'#b85e62',colorText:'#39352f',colorTextSecondary:'#777069',colorBorder:'#ddd6cc',colorBorderSecondary:'#ebe7e1',colorBgContainer:'#ffffff',colorBgLayout:design.canvas,colorBgElevated:'#ffffff',colorFillAlter:'#faf8f5',borderRadius:design.radius,fontFamily:'"Noto Sans KR Variable", sans-serif',fontSize:font,controlHeight:Math.round(font*2.7),controlHeightLG:Math.round(font*2.8),fontSizeLG:font,motion:motion&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches},components:{Button:{primaryShadow:'none',defaultShadow:'none',fontWeight:560,paddingInlineLG:20},Card:{borderRadiusLG:14},Segmented:{trackBg:'#f6f3ef',itemSelectedBg:'#ffffff',itemSelectedColor:'#6e5941',itemColor:'#777069',itemHoverBg:'#efebe5'},Tag:{defaultBg:'#f6f2ec'},Table:{headerBg:'#faf8f5',headerColor:'#766c60',borderColor:'#eeeae4',rowHoverBg:'#fcfaf6',cellPaddingBlock:18,cellPaddingInline:20},Input:{activeShadow:'0 0 0 3px rgba(128,106,81,.1)'},Select:{optionSelectedBg:'#f2ebe0',optionSelectedColor:'#5d4b38'},DatePicker:{activeShadow:'0 0 0 3px rgba(128,106,81,.1)'},Modal:{borderRadiusLG:16},Drawer:{footerPaddingBlock:20}}}}>{children}</ConfigProvider>}
+export function ClinicTheme({font,motion,children}) {
+ const compact=font<=16;
+ return <ConfigProvider locale={koKR} componentSize="large" theme={{
+  token:{
+   colorPrimary:design.accent,colorInfo:'#59748e',colorSuccess:'#60726b',colorWarning:'#9a702a',colorError:'#ad4e59',
+   colorText:design.ink,colorTextSecondary:design.muted,colorBorder:design.line,colorBorderSecondary:design.line,
+   colorBgContainer:'#ffffff',colorBgLayout:design.canvas,colorBgElevated:'#ffffff',colorFillAlter:design.softest,
+   borderRadius:design.radius,fontFamily:'"Noto Sans KR Variable", sans-serif',fontSize:font,fontSizeLG:font,
+   controlHeight:Math.max(44,Math.round(font*2.7)),controlHeightLG:Math.max(44,Math.round(font*2.8)),
+   motion:motion&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  },
+  components:{
+   Button:{primaryShadow:'none',defaultShadow:'none',fontWeight:550,paddingInlineLG:20},
+   Card:{borderRadiusLG:16},
+   Segmented:{trackBg:design.softest,itemSelectedBg:'#ffffff',itemSelectedColor:design.accent,itemColor:design.muted,itemHoverBg:design.soft},
+   Tag:{defaultBg:design.soft},
+   Table:{headerBg:design.softest,headerColor:design.muted,borderColor:design.line,rowHoverBg:design.softest,cellPaddingBlock:compact?12:18,cellPaddingInline:compact?16:20},
+   Input:{activeShadow:'0 0 0 3px var(--focus-ring)'},
+   Select:{optionSelectedBg:design.soft,optionSelectedColor:design.accent},
+   DatePicker:{activeShadow:'0 0 0 3px var(--focus-ring)'},
+   Modal:{borderRadiusLG:16},Drawer:{footerPaddingBlock:20}
+  }
+ }}>{children}</ConfigProvider>;
+}

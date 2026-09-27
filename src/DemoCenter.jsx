@@ -1,3 +1,4 @@
+import {design} from './design-config';
 import React,{useEffect,useRef,useState} from 'react';
 import {Button,Select,Progress,Modal as AntModal} from 'antd';
 import {Play,Pause,SkipForward,Stop,Presentation,CheckCircle} from './icons';
@@ -81,7 +82,7 @@ export function DemoCenter({open,onClose}) {
       <div className="dialog-actions"><Button href={`${import.meta.env.BASE_URL}demo-guide.md`} download="온담_발표_시연_안내.md">발표 대본 내려받기</Button><Button onClick={onClose}>닫기</Button><Button type="primary" icon={<Play/>} onClick={start}>선택한 순서 자동 시작</Button></div>
     </AntModal>
     {status!=='idle'&&<section className="demo-player demo-ui" data-demo-status={status} data-demo-step={current?.index||0} aria-label="자동 시연 조절">
-      <Progress percent={current?Math.round(current.index/current.total*100):0} showInfo={false} size="small" strokeColor="#806a51"/>
+      <Progress percent={current?Math.round(current.index/current.total*100):0} showInfo={false} size="small" strokeColor={design.accent}/>
       <div className="demo-player-content"><div className="demo-caption"><div className="demo-eyebrow"><Presentation size={19}/><span>{status==='done'?'시연 완료':status==='error'?'진행 확인 필요':status==='paused'?'일시정지':current?.settled?'설명 시간':'화면 진행 중'} · {current?.index||0}/{current?.total||count}</span><span>{current?.chapter}</span></div><h2>{status==='done'?'시연을 모두 마쳤습니다.':current?.title||'시연을 준비하고 있습니다.'}</h2><p>{error||current?.narration}</p>{current&&<div className="demo-expected"><CheckCircle size={17}/><span>확인할 내용: {current.expected}</span></div>}</div><div className="demo-controls">{!['done','error'].includes(status)&&<><Button icon={status==='paused'?<Play/>:<Pause/>} onClick={pause}>{status==='paused'?'계속 재생':'일시정지'}</Button><Button icon={<SkipForward/>} disabled={!current?.settled} onClick={()=>{control.current.next=true;if(control.current.paused){control.current.paused=false;setStatus('playing')}}}>다음</Button></>}<Button icon={<Stop/>} onClick={stop}>종료·원래대로</Button></div></div>
     </section>}
   </>;

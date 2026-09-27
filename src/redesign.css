@@ -1,12 +1,12 @@
 /* Shared presentation system. Business callbacks and page state remain in place. */
-:root { --ink:#322f2b; --muted:#726c64; --border:#e8e2d9; --sidebar:13.55rem; }
+:root { --border:var(--line); --sidebar:14rem; }
 body {background:var(--canvas); color:var(--ink);}
 :where(h1,h2,h3) {text-wrap:balance;} :where(p,small) {word-break:keep-all;}
 .sidebar {background:var(--nav-bg); padding:1.7rem .8rem .9rem; border-color:var(--line);}
 .brand {display:flex; align-items:center; gap:.6rem; font-size:1.36rem; color:var(--accent); padding:0 .55rem; letter-spacing:-.065em;}
 .brand-symbol {width:2.3rem;height:2.3rem;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff;}
 .brand-sub {margin:.45rem .7rem 1.9rem;font-size:.79rem;}
-.nav-caption {font-size:.68rem;color:#837b6e;letter-spacing:.04em;margin:0 .75rem .65rem;}
+.nav-caption {font-size:.68rem;color:var(--muted);letter-spacing:.04em;margin:0 .75rem .65rem;}
 .sidebar nav {gap:.16rem;}
 .sidebar nav a {min-height:2.78rem;padding:.65rem .8rem;font-size:.93rem;gap:.8rem;border-radius:var(--radius);}
 .sidebar nav a svg {width:21px;height:21px;}
@@ -36,11 +36,11 @@ main {padding:1.7rem 1.8rem 0;max-width:1700px;}
 .redesign-page .ant-btn.stat {position:relative;align-items:center;justify-content:flex-start;text-align:left;flex-direction:row;flex-wrap:nowrap;gap:1rem;padding:1.3rem;min-height:8.1rem;border:1px solid var(--line);border-radius:var(--card-radius);background:#fff;box-shadow:none;color:var(--ink);}
 .redesign-page .stat-icon {height:2.7rem;width:2.7rem;border-radius:var(--radius);background:var(--soft);color:var(--accent);}
 .redesign-page .stat-icon svg {width:27px;height:27px;}
-.redesign-page .stat-label {font-size:.9rem;font-weight:500;color:#645f58;}
+.redesign-page .stat-label {font-size:.9rem;font-weight:500;color:var(--accent);}
 .redesign-page .stat strong {font-size:2.05rem;font-weight:600;line-height:1.5;font-variant-numeric:tabular-nums;}
 .redesign-page .stat strong small {font-size:.92rem;font-weight:400;margin-left:.25rem;}
-.redesign-page .stat .muted {display:block;font-size:.73rem;line-height:1.6;color:#756f66;}
-.redesign-page .ant-btn.stat:hover {border-color:#baa88f;background:var(--softest);}
+.redesign-page .stat .muted {display:block;font-size:.73rem;line-height:1.6;color:var(--accent);}
+.redesign-page .ant-btn.stat:hover {border-color:var(--muted);background:var(--softest);}
 .redesign-page .dashboard-grid {grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:1.1rem;}
 .redesign-page .panel {border-color:var(--line);border-radius:var(--card-radius);box-shadow:none;}
 .redesign-page .panel .panel-head {padding:1.2rem 1.15rem .85rem;gap:.6rem;flex-wrap:wrap;}
@@ -54,7 +54,7 @@ main {padding:1.7rem 1.8rem 0;max-width:1700px;}
 .redesign-page .task-copy small {font-size:.78rem;line-height:1.65;margin-top:.15rem;}
 .redesign-page .task-row>.badge {font-size:.7rem;padding:.3rem .5rem;}
 .ant-tag.badge {border-radius:6px;font-weight:500;}
-.green {background:#f2eee6;color:#706044;}.amber {background:#fbf0df;color:#8a5a1b;}.rose {background:#f8e9e8;color:#a14449;}.blue {background:#edf1f6;color:#4a647e;}.purple {background:#f1edf5;color:#726182;}
+.green {background:var(--soft);color:var(--accent);}.amber {background:var(--soft);color:#8a5a1b;}.rose {background:#f8e9e8;color:#a14449;}.blue {background:#edf1f6;color:#4a647e;}.purple {background:#f1edf5;color:#726182;}
 .ant-segmented.tabs {background:var(--softest);border:1px solid var(--line);border-radius:var(--radius);padding:.2rem;}
 .ant-segmented-item-label {font-size:.85rem!important;line-height:2.25rem!important;min-height:2.25rem!important;}
 .panel-head .ant-segmented-item-label {font-size:.74rem!important;padding:0 .5rem!important;}
@@ -78,81 +78,25 @@ main {padding:1.7rem 1.8rem 0;max-width:1700px;}
 .inventory-guide b {font-weight:550;color:var(--accent);margin-right:.4rem;}
 .stock-page .toolbar {padding:1.1rem;gap:.9rem;border-color:var(--line);}
 .stock-page .toolbar .search {flex:1;max-width:17rem;min-width:11rem;border-radius:var(--radius);font-size:.85rem;}
-.stock-page .ant-table-thead .ant-table-cell {background:var(--softest);color:#70665a;font-size:.78rem!important;font-weight:500;}
+.stock-page .ant-table-thead .ant-table-cell {background:var(--softest);color:var(--accent);font-size:.78rem!important;font-weight:500;}
 .stock-page .ant-table-cell {padding:1.15rem 1rem!important;font-size:.94rem!important;border-bottom-color:var(--line)!important;font-variant-numeric:tabular-nums;}
 .stock-page .ant-table-cell:first-child b {font-size:1rem;font-weight:600;}
 .stock-page .ant-table-cell small {font-size:.76rem;}
 .stock-page .ant-table-tbody>tr:last-child>td {border-bottom:0;}
-.page-footer {font-size:.65rem;color:#7b746a;padding:1.25rem 0;line-height:1.7;}
+.page-footer {font-size:.65rem;color:var(--muted);padding:1.25rem 0;line-height:1.7;}
 .page-footer b {font-weight:500;padding-left:.4rem;border-left:1px solid var(--line);margin-left:.5rem;}
 .clinic-drawer .ant-drawer-content {border-radius:var(--card-radius) 0 0 var(--card-radius);}
 .clinic-drawer .ant-drawer-header {border-bottom:1px solid var(--line);background:var(--softest);}
 .clinic-drawer .ant-drawer-title h2 {font-size:1.2rem;font-weight:600;}
 .clinic-drawer .field {margin-bottom:1.2rem;}
-.clinic-drawer .field>label {font-size:.85rem;color:#5c554c;font-weight:550;}
+.clinic-drawer .field>label {font-size:.85rem;color:var(--accent);font-weight:550;}
 .clinic-drawer .lead {font-size:.9rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;}
 .clinic-drawer :is(.ant-input,.ant-select,.ant-picker) {font-size:1rem;}
 .clinic-drawer .ant-input[readonly] {background:var(--softest);color:var(--accent);}
 .clinic-drawer .reading-sample {background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;}
-.clinic-drawer .notice {background:var(--softest);color:#665f55;border:1px solid var(--line);border-radius:var(--radius);}
+.clinic-drawer .notice {background:var(--softest);color:var(--accent);border:1px solid var(--line);border-radius:var(--radius);}
 .clinic-drawer .dialog-actions {margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--line);}
 :focus-visible {outline:3px solid var(--accent);outline-offset:3px;}
-/* B — an editorial overview with a vertical metric rail and a catalogue workspace. */
-html[data-design=b] .brand-symbol {border-radius:6px;}
-html[data-design=b] .sidebar {border-right:0;}
-html[data-design=b] .sidebar nav a.selected {background:#fff;box-shadow:0 1px 3px #3c2e2210;}
-html[data-design=b] .topbar {border-bottom:0;background:var(--canvas);}
-html[data-design=b] .section-eyebrow {margin-bottom:.65rem;letter-spacing:.08em;}
-html[data-design=b] .redesign-page .page-title {padding-bottom:1.4rem;border-bottom:1px solid #d8cbb9;margin-bottom:1.5rem;}
-html[data-design=b] .redesign-page .page-title h1 {font-weight:450;font-size:2.4rem;letter-spacing:-.07em;}
-html[data-design=b] .today-page .overview-section {display:grid;grid-template-columns:10.5rem minmax(0,1fr);gap:1.4rem;}
-html[data-design=b] .today-page .stats {display:flex;flex-direction:column;gap:0;background:var(--soft);border:1px solid var(--line);border-radius:var(--card-radius);margin:0;}
-html[data-design=b] .today-page .ant-btn.stat {padding:1.3rem;flex:1;flex-direction:column;align-items:flex-start;justify-content:center;gap:.65rem;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;min-height:8.5rem;}
-html[data-design=b] .today-page .stat:last-child {border-bottom:0;}
-html[data-design=b] .today-page .stat-icon {background:#fff;width:2.2rem;height:2.2rem;}
-html[data-design=b] .today-page .stat strong {font-size:2.7rem;font-weight:400;}
-html[data-design=b] .today-page .stat .muted {font-size:.74rem;white-space:normal;}
-html[data-design=b] .today-page .dashboard-grid {display:flex;flex-direction:column;gap:1rem;}
-html[data-design=b] .today-page .dashboard-right {display:grid;grid-template-columns:1.4fr 1fr;gap:1rem;}
-html[data-design=b] .redesign-page .task-icon {border-radius:5px;}
-html[data-design=b] .redesign-page .ant-btn.task-row {min-height:4.7rem;}
-html[data-design=b] .redesign-page .ant-btn.task-row.highlight {background:#f5ecde;}
-html[data-design=b] .redesign-page .resume {background:#eee4d5;border:0;}
-html[data-design=b] .inventory-guide {border:0;padding:.1rem 0 .7rem;background:none;}
-html[data-design=b] .stock-page>.panel>.ant-card-body {display:grid;grid-template-columns:12rem minmax(0,1fr);}
-html[data-design=b] .stock-page .toolbar {grid-column:1;grid-row:1 / span 3;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:1rem;gap:1rem;background:var(--softest);border:0;border-right:1px solid var(--line);}
-html[data-design=b] .stock-page .toolbar .tabs {background:none;border:0;}
-html[data-design=b] .stock-page .toolbar .ant-segmented-group {flex-direction:column;}
-html[data-design=b] .stock-page .toolbar .ant-segmented-item-label {text-align:left;padding:.35rem .65rem!important;}
-html[data-design=b] .stock-page .toolbar .search {width:100%;min-width:0;flex:none;margin-top:.2rem;font-size:.78rem;}
-html[data-design=b] .stock-page .toolbar~* {grid-column:2;}
-html[data-design=b] .stock-page .ant-table-cell {padding:1.4rem .85rem!important;}
-/* C — a crisp workspace, joined metrics, timeline first, and ruled inventory. */
-html[data-design=c] .sidebar {background:white;border-right:1px solid var(--line);}
-html[data-design=c] .brand-symbol {border:0;background:var(--soft);border-radius:7px;}
-html[data-design=c] .sidebar nav a.selected {border-left:3px solid var(--accent);padding-left:calc(.8rem - 3px);}
-html[data-design=c] .topbar {background:white;}
-html[data-design=c] .section-eyebrow {font-size:.73rem;}
-html[data-design=c] .redesign-page .page-title h1 {font-size:1.8rem;font-weight:700;}
-html[data-design=c] .redesign-page .page-title {margin-bottom:1.2rem;}
-html[data-design=c] .redesign-page .stats {gap:0;border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;margin-bottom:1.2rem;}
-html[data-design=c] .redesign-page .ant-btn.stat {min-height:6.2rem;border:0;border-right:1px solid var(--line);border-radius:0;gap:.85rem;padding:1rem 1.3rem;}
-html[data-design=c] .redesign-page .stat:last-child {border-right:0;}
-html[data-design=c] .redesign-page .stat strong {font-size:1.7rem;}
-html[data-design=c] .redesign-page .stat-icon {background:none;border:1px solid var(--line);border-radius:50%;}
-html[data-design=c] .redesign-page .dashboard-grid {grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);}
-html[data-design=c] .redesign-page .tasks-panel {grid-column:2;grid-row:1;}
-html[data-design=c] .redesign-page .dashboard-right {grid-column:1;grid-row:1;}
-html[data-design=c] .redesign-page .panel .panel-head {border-bottom:1px solid var(--line);padding:.9rem 1rem;}
-html[data-design=c] .redesign-page .task-list {padding:0 .85rem;}
-html[data-design=c] .redesign-page .ant-btn.task-row {min-height:4.85rem;}
-html[data-design=c] .redesign-page .task-row.highlight {background:transparent;border-left:3px solid #a7824e;border-bottom:1px solid var(--line);border-radius:0;margin:0;padding-left:.65rem;}
-html[data-design=c] .redesign-page .task-icon {background:none;border:1px solid var(--line);border-radius:var(--radius);}
-html[data-design=c] .redesign-page .resume {border-style:dashed;background:var(--softest);}
-html[data-design=c] .inventory-guide {border:0;border-left:3px solid var(--accent);border-radius:0;padding:.55rem 1rem;background:none;}
-html[data-design=c] .stock-page .toolbar {background:white;}
-html[data-design=c] .stock-page .ant-table-cell {padding:.85rem 1rem!important;}
-html[data-design=c] .stock-page .ant-table-tbody>tr:nth-child(even)>td {background:var(--softest);}
 /* Responsive reflow preserves the user's existing navigation breakpoint. */
 @media(min-width:1001px) and (max-width:1280px) {
  .breadcrumb {display:none;}.topbar .global-search {margin-left:0;}
@@ -160,9 +104,6 @@ html[data-design=c] .stock-page .ant-table-tbody>tr:nth-child(even)>td {backgrou
  .redesign-page .stat .muted {display:none;}
  .redesign-page .ant-btn.stat {padding:1.1rem;gap:.7rem;}
  .redesign-page .task-row>.badge {display:none;}
- html[data-design=b] .today-page .overview-section {grid-template-columns:8.5rem minmax(0,1fr);gap:1rem;}
- html[data-design=b] .today-page .dashboard-right {grid-template-columns:1fr;}
- html[data-design=b] .today-page .stat .muted {display:block;}
 }
 @media(max-width:1000px) {
  .sidebar {max-width:85vw;} .workspace {margin-left:0;}
@@ -172,29 +113,14 @@ html[data-design=c] .stock-page .ant-table-tbody>tr:nth-child(even)>td {backgrou
  .redesign-page .dashboard-grid {grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);}
  .redesign-page .stat .muted {display:none;}
  .redesign-page .ant-btn.stat {padding:1.1rem;gap:.7rem;}
- html[data-design=b] .today-page .overview-section {grid-template-columns:9rem minmax(0,1fr);gap:1rem;}
- html[data-design=b] .today-page .dashboard-right {grid-template-columns:1fr;}
- html[data-design=b] .stock-page>.panel>.ant-card-body {grid-template-columns:10rem minmax(0,1fr);}
 }
 @media(max-width:740px) {
- .redesign-page .dashboard-grid,html[data-design=c] .redesign-page .dashboard-grid {grid-template-columns:1fr;}
- html[data-design=c] .redesign-page .tasks-panel,html[data-design=c] .redesign-page .dashboard-right {grid-column:1;grid-row:auto;}
+ .redesign-page .dashboard-grid {grid-template-columns:1fr;}
  .redesign-page .page-title {align-items:flex-start;flex-direction:column;gap:1rem;}
  .redesign-page .page-title .actions {width:100%;}
  .redesign-page .page-title .actions>.btn {flex:1;}
  .redesign-page .panel-head .tabs {width:auto;}
  .redesign-page .dashboard-right {display:grid;grid-template-columns:1fr;}
- html[data-design=b] .today-page .overview-section {display:block;}
- html[data-design=b] .today-page .stats {flex-direction:row;margin-bottom:1rem;}
- html[data-design=b] .today-page .ant-btn.stat {padding:1rem;border-bottom:0;border-right:1px solid var(--line);min-height:8rem;}
- html[data-design=b] .today-page .stat:last-child {border-right:0;}
- html[data-design=b] .today-page .stat-icon {display:none;}
- html[data-design=b] .today-page .stat strong {font-size:2.15rem;}
- html[data-design=b] .stock-page>.panel>.ant-card-body {display:block;}
- html[data-design=b] .stock-page .toolbar {border-right:0;border-bottom:1px solid var(--line);}
- html[data-design=b] .stock-page .toolbar .ant-segmented-group {flex-direction:row;}
- html[data-design=b] .stock-page .toolbar .ant-segmented-item-label {padding:0 .5rem!important;}
- html[data-design=b] .stock-page .toolbar .search {max-width:none;font-size:.85rem;}
 }
 @media(max-width:520px) {
  main {padding:1.2rem .9rem 0;}
@@ -234,18 +160,6 @@ html[data-design=c] .stock-page .ant-table-tbody>tr:nth-child(even)>td {backgrou
  .stock-page .ant-table-cell {padding:1rem .85rem!important;}
  .page-footer {font-size:.63rem;gap:.35rem;align-items:flex-start;flex-direction:column;}
  .clinic-drawer .ant-drawer-content {border-radius:0;}
- html[data-design=b] .redesign-page .page-title h1 {font-size:1.9rem;}
- html[data-design=b] .today-page .ant-btn.stat {padding:.8rem .65rem;min-height:6rem;align-items:stretch;}
- html[data-design=b] .today-page .stat>span:last-child {display:block;}
- html[data-design=b] .today-page .stat-label {font-size:.83rem;}
- html[data-design=b] .today-page .stat strong {font-size:1.8rem;}
- html[data-design=c] .redesign-page .stats {grid-template-columns:repeat(3,1fr);}
- html[data-design=c] .redesign-page .ant-btn.stat {padding:.8rem .55rem;min-height:5.6rem;}
- html[data-design=c] .redesign-page .stat-icon {display:none;}
- html[data-design=c] .redesign-page .stat>span:last-child {display:block;}
- html[data-design=c] .redesign-page .stat-label {font-size:.8rem;}
- html[data-design=c] .redesign-page .stat strong {font-size:1.65rem;}
- html[data-design=c] .redesign-page .page-title h1 {font-size:1.6rem;}
 }
 @media(prefers-reduced-motion:reduce) {*,*::before,*::after {animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}}
 html[data-motion=off] *,html[data-motion=off] *::before,html[data-motion=off] *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
@@ -253,6 +167,80 @@ html[data-motion=off] *,html[data-motion=off] *::before,html[data-motion=off] *:
 .ant-btn.profile {border:0;border-top:1px solid var(--line);}
 .redesign-page .ant-btn.appointment {border:0;border-bottom:1px solid var(--line);border-radius:0;}
 .redesign-page .ant-btn.appointment:last-child {border-bottom:0;}
-@media(min-width:741px) {html[data-design=b] .today-page .stats {align-self:start;}html[data-design=b] .today-page .ant-btn.stat {flex:none;min-height:10.4rem;}}
-html[data-design=b] .stock-page>.panel>.ant-card-body::before,html[data-design=b] .stock-page>.panel>.ant-card-body::after {display:none;}
-html[data-design=b] .stock-page .toolbar {grid-row:1;}
+/* Selected A: neutral palette and shared treatment across every workspace. */
+:root {--green:var(--accent);--sage:var(--softest);}
+html[data-density=compact] {--row-space:.8rem;--panel-space:1.1rem;}
+html[data-density=comfortable] {--row-space:1.1rem;--panel-space:1.25rem;}
+body {font-weight:400;}
+.redesign-page .page-title h1 {font-weight:620;}
+.redesign-page .page-title p {font-size:.9rem;line-height:1.75;}
+.redesign-page .panel {background:#fff;}
+.redesign-page .toolbar {padding:var(--panel-space);border-color:var(--line);}
+.redesign-page .padded {padding:var(--panel-space);}
+.redesign-page .ant-table-cell {padding:var(--row-space) 1rem!important;font-size:.94rem!important;border-color:var(--line)!important;}
+.redesign-page .ant-table-thead .ant-table-cell {font-size:.82rem!important;background:var(--softest);font-weight:500;color:var(--muted);}
+.redesign-page .ant-table-cell small {font-size:.81rem;line-height:1.65;}
+.redesign-page .ant-table-cell b {font-weight:580;}
+.redesign-page .stock-page .ant-table-cell {padding:var(--row-space) 1rem!important;}
+.redesign-page .ant-btn:is(.btn,.icon-btn,.calendar-event,.day-number),.topbar .ant-btn {min-height:44px;}
+.ant-segmented-item-label {min-height:44px!important;line-height:44px!important;}
+.panel-head .ant-segmented-item-label {font-size:.81rem!important;}
+.redesign-page .stat .muted {font-size:.81rem;}
+.redesign-page .task-copy small {font-size:.84rem;}
+.redesign-page .task-row>.badge {font-size:.76rem;}
+.redesign-page .appointment>.badge {font-size:.75rem;}
+.redesign-page .date-label {font-size:.8rem;}
+.redesign-page .inventory-guide {font-size:.8rem;}
+.redesign-page .resume p {font-size:.85rem;color:var(--muted);}
+.sidebar .nav-caption {font-size:.75rem;color:var(--muted);}
+.sidebar .brand-sub {font-size:.83rem;}
+.sidebar nav a {min-height:44px;font-weight:470;}
+.sidebar nav a.selected {font-weight:600;}
+.brand {color:var(--ink);}
+.brand-symbol {background:var(--softest);border-color:var(--line);}
+.initial {background:var(--soft);color:var(--accent);}
+.font-options {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin:1.1rem 0;}
+.font-options .ant-btn {min-height:6.3rem;border:1px solid var(--line);border-radius:10px;padding:.8rem .35rem;color:var(--muted);}
+.font-options .ant-btn.selected {border-color:var(--accent);background:var(--soft);color:var(--ink);box-shadow:inset 0 0 0 1px var(--accent);}
+.font-options .ant-btn b {font-size:.9rem;font-weight:550;}
+.font-options .ant-btn small {font-size:.83rem;}
+.reading-sample {border:1px solid var(--line);background:var(--softest);border-radius:12px;}
+.green,.green-text {color:var(--accent);}.green {background:var(--soft);}
+.leave-summary {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;}
+.leave-summary>div {border:1px solid var(--line);background:#fff;border-radius:12px;padding:1rem;color:var(--muted);font-size:.9rem;}
+.leave-summary b {color:var(--ink);}
+.finance-metrics>div {border:1px solid var(--line);border-radius:16px;background:#fff;padding:1.3rem;}
+.finance-metrics strong {color:var(--ink);font-weight:600;letter-spacing:-.045em;}
+.finance-metrics p {color:var(--muted);}
+.setting-row,.rule-row {gap:1rem;border-color:var(--line);}
+.rule-row h3,.setting-row h3 {font-weight:550;}
+.setting-row p,.rule-row p {color:var(--muted);}
+.ant-btn:is(.list-button,.leave-request-row) {border:0;border-bottom:1px solid var(--line);border-radius:0;}
+.clinic-calendar .ant-picker-content th {background:var(--softest);font-size:.88rem;color:var(--muted);}
+.clinic-calendar .ant-picker-calendar-date-today {background:var(--soft)!important;}
+.clinic-calendar .ant-picker-calendar-date {border-color:var(--line)!important;}
+.clinic-calendar .ant-btn.calendar-event {font-size:.82rem;border-radius:6px;}
+.calendar-event.green {background:var(--soft);color:var(--accent);}
+.demo-player {background:#fff;border-color:var(--line);color:var(--ink);}
+.demo-focus {outline-color:var(--accent)!important;box-shadow:0 0 0 7px var(--focus-ring)!important;}
+.demo-eyebrow,.demo-expected {color:var(--muted);}
+.toast {background:var(--accent);}
+.ant-modal-mask,.ant-drawer-mask {background:var(--overlay)!important;}
+.tablet-page {background:var(--canvas);font-size:max(18px,1rem);}
+.tablet-content .answer {min-height:52px;}
+.tablet-content .answer.selected {background:var(--soft);border-color:var(--accent);}
+/* Compact is a density preference, not just a scaled-down screenshot. */
+html[data-density=compact] main {padding-top:1.4rem;}
+html[data-density=compact] .redesign-page .ant-btn.stat {min-height:7rem;padding:1.05rem 1.2rem;}
+html[data-density=compact] .redesign-page .stat strong {font-size:1.85rem;}
+html[data-density=compact] .redesign-page .ant-btn.task-row {min-height:4.4rem;padding-top:.55rem;padding-bottom:.55rem;}
+html[data-density=compact] .redesign-page .ant-btn.appointment {min-height:3.8rem;}
+html[data-density=compact] .redesign-page .panel .panel-head {padding:1rem 1.1rem .75rem;}
+html[data-density=compact] .redesign-page .task-copy strong {font-weight:550;}
+@media(max-width:740px) {.leave-summary{grid-template-columns:1fr}.setting-row,.rule-row{flex-wrap:wrap}.font-options{grid-template-columns:repeat(2,minmax(0,1fr))}.font-options .ant-btn{min-height:5.2rem}.redesign-page .page-title .actions{width:100%}.redesign-page .panel-head{flex-wrap:wrap}.redesign-page .panel-head h2{white-space:normal}}
+@media(max-width:520px) {.sidebar{--sidebar:15rem}.redesign-page .task-copy strong{font-size:1rem}.redesign-page .task-copy small{font-size:.86rem}.redesign-page .stock-page .toolbar .ant-segmented-item-label{font-size:.85rem!important}.redesign-page .inventory-guide{font-size:.82rem}.redesign-page .page-title h1{font-size:1.65rem}.redesign-page .stat-label{font-size:1rem}.redesign-page .toolbar .tabs{max-width:100%}.redesign-page .toolbar .search{min-width:0;width:100%}.font-options .ant-btn{font-size:1rem}.redesign-page .btn{min-height:44px}.topbar .ant-btn.icon-btn{min-width:44px}.clinic-modal .ant-modal-container{padding:1rem}.reading-sample{padding:1rem}}
+@media(min-width:741px) {.redesign-page .toolbar .search{width:auto;max-width:20rem;min-width:12rem;flex:1;}}
+.clinic-calendar .ant-picker-cell-selected .ant-picker-calendar-date,.clinic-calendar .ant-picker-cell-selected .ant-picker-cell-inner {background:var(--soft)!important;color:var(--ink)!important;}
+.clinic-calendar .ant-picker-calendar-date {height:8rem!important;}
+.clinic-calendar .ant-picker-calendar-date-content {height:6rem!important;overflow:auto;}
+@media(max-width:520px) {html[data-density=compact] .redesign-page .ant-btn.stat{min-height:4.6rem;padding:.7rem .9rem;}}
