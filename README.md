@@ -4,13 +4,14 @@
 
 - 공개 페이지: https://castlerain.github.io/eunjoo_page/
 - 소스 저장소: https://github.com/CastleRain/eunjoo_page
-- 직원·휴가: https://castlerain.github.io/eunjoo_page/#leave
+- 직원 로그인·실제 휴가 저장: https://castlerain.github.io/eunjoo_page/?mode=live
+- 직원·휴가 시안: https://castlerain.github.io/eunjoo_page/#leave
 
 ## 현재 구현
 
 React 19 + Vite + Ant Design 6 + Day.js를 사용합니다. Noto Sans KR Variable, Lucide 아이콘, Motion을 포함합니다. 공용 UI는 `src/ui.jsx`, 테마는 `src/Theme.tsx`, 공통 색상은 `src/design-config.ts`에서 관리합니다. 확정된 A 레이아웃에 흰색·연한 갈색을 적용했습니다.
 
-기본 화면은 가상 데이터 시안입니다. `?mode=live`에는 Supabase 직원 로그인과 DB에 저장되는 휴가 신청·승인·공유 달력을 구현했습니다. 실제 계정을 등록한 뒤 통합 검증 및 배포를 진행합니다. 다른 CRM 기능·재고·결제·메시지 발송은 아직 DB에 연결하지 않았습니다. 시안 데이터는 새로고침 시 초기화됩니다.
+기본 화면은 가상 데이터 시안입니다. `?mode=live`에는 Supabase 직원 로그인과 DB에 저장되는 휴가 신청·승인·공유 달력을 구현했습니다. 대표 및 직원 테스트 계정을 등록하고 실제 로그인·저장·승인·공유 달력·개인 사유 비노출을 검증했습니다. 다른 CRM 기능·재고·결제·메시지 발송은 아직 DB에 연결하지 않았습니다. 시안 데이터는 새로고침 시 초기화됩니다.
 
 개발 브랜치에서 TypeScript를 점진 도입했습니다. 진입점·테마·색상·공통 업무 규칙을 전환했으며 대부분의 업무 화면은 아직 JSX입니다. `server/`에 NestJS 상태 확인 서버와 Prisma 계정·휴가 모델을 구성했습니다. 상태 확인 응답은 서버 프로세스의 기동 여부만 나타내며 DB나 실제 업무 기능의 준비 완료를 뜻하지 않습니다.
 

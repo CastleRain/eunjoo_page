@@ -4,13 +4,13 @@
 
 `?mode=live`에서 Supabase Auth 이메일/비밀번호 로그인과 실제 저장되는 직원·휴가 화면을 제공합니다. 기존 기본 주소 및 `?mode=demo#today`는 가상 데이터 시안이며 자동 시연도 이쪽에서만 동작합니다. 다른 CRM·재고 메뉴의 DB 연결은 아직 없습니다. `server/`의 NestJS/Prisma는 향후 용도로 남겨두었으며 Supabase 기능에서 사용하지 않습니다.
 
-프로젝트: `ondam-workspace` (`jjxgyuhwlflhnhxragsn`, Seoul). 2026-09-27 SQL Editor로 `supabase/migrations/202609270001_leave.sql`을 적용했습니다. 원격의 3개 업무 테이블에 RLS가 켜졌으며 `authenticated`의 직접 SELECT 권한은 없는 것을 확인했습니다. 대표 테스트 계정 생성 및 OWNER 프로필 연결을 완료했습니다. 로컬 앱에서 실제 Supabase 로그인, 신청 저장, 새로고침 유지, 승인/달력 반영, 취소 요청 중 달력 유지, 취소 승인 흐름을 확인했습니다. 직원 계정과의 교차 역할 브라우저 검증 및 공개 배포는 아직 남아 있습니다.
+프로젝트: `ondam-workspace` (`jjxgyuhwlflhnhxragsn`, Seoul). 2026-09-27 SQL Editor로 `supabase/migrations/202609270001_leave.sql`을 적용했습니다. 원격의 3개 업무 테이블에 RLS가 켜졌으며 `authenticated`의 직접 SELECT 권한은 없는 것을 확인했습니다. 대표 테스트 계정 생성 및 OWNER 프로필 연결을 완료했습니다. 로컬 앱에서 실제 Supabase 로그인, 신청 저장, 새로고침 유지, 승인/달력 반영, 취소 요청 중 달력 유지, 취소 승인 흐름을 확인했습니다. 직원 테스트 계정 3개도 등록했습니다. 직원 신청 → 대표 승인 → 다른 직원 달력 공유 및 타인 사유/상세 비노출을 브라우저에서 확인했습니다.
 
 ## 연결 및 배포
 
 - `.env.example`을 기준으로 로컬 `.env.local`에 URL과 **Publishable key**만 설정합니다. secret/service_role 키는 사용하지 않습니다.
 - 이 저장소의 GitHub Repository Variables는 등록 완료했습니다. 다른 환경에서는 `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`를 설정합니다. 두 값은 브라우저에 공개되는 설정입니다.
-- Pages 빌드에 이 변수를 주입합니다. 로그인 주소는 `https://castlerain.github.io/eunjoo_page/?mode=live`입니다. 이 URL은 해당 브랜치를 main에 배포한 뒤 사용합니다.
+- Pages 빌드에 이 변수를 주입합니다. 로그인 주소는 `https://castlerain.github.io/eunjoo_page/?mode=live`입니다. 이 URL은 main의 GitHub Pages 배포 완료 후 사용할 수 있습니다.
 - 기존 DB에는 초기 migration을 재실행하지 않습니다. 후속 변경은 새 migration 파일로 관리합니다.
 - Docker가 실행 중인 환경에서 `npm run test:supabase`는 외부 포트를 열지 않는 임시 PostgreSQL 17 컨테이너를 생성하고 테스트 후 삭제합니다. `bootstrap.sql`은 로컬의 Auth 모형 전용이며 실제 Supabase에 적용하지 않습니다.
 
@@ -43,4 +43,8 @@ values ('AUTH_USERS에서_복사한_UUID'::uuid, '한승재', 'OWNER');
 
 - TypeScript, 기존 테스트 10개, 프로덕션 빌드 통과.
 - PostgreSQL 실행 테스트: 비로그인/비활성/미등록 계정 차단, 직원의 직접 테이블 접근 및 자기 권한 변경 차단, 타인 신청 조회·수정 차단, 대표 전용 승인, 일수/반차, 중복 요청, 겹침, 오래된 승인 요청, 취소/반려/달력 및 개인정보 제외 검증.
-- 실제 Supabase Auth 대표 로그인 및 DB 신청·승인·취소 흐름을 브라우저에서 확인했습니다. 확인용 1건은 사유에 테스트임을 표시했으며 최종 취소 처리하여 달력에서 제외했습니다. 직원 계정의 별도 브라우저 검증은 추가 계정 생성 후 진행합니다.
+- 실제 Supabase Auth 대표 로그인 및 DB 신청·승인·취소 흐름을 브라우저에서 확인했습니다. 확인용 1건은 사유에 테스트임을 표시했으며 최종 취소 처리하여 달력에서 제외했습니다. 직원 테스트 1·2·3의 로그인, 직원 메뉴 제한, 타인 신청 비노출, 대표 승인 및 승인 일정 공유도 실제 계정을 순차 로그인하여 검증했습니다.
+
+## 테스터 접속 방법
+
+Supabase 관리자 화면을 공유하지 않고 `https://castlerain.github.io/eunjoo_page/?mode=live`를 전달합니다. 설치 없이 PC/휴대폰 브라우저에서 로그인할 수 있습니다. 대표는 승인 대기함/전체 신청 내역을, 직원은 본인 신청 내역과 공용 달력을 사용합니다. 신청 이후 다른 사용자의 화면은 최대 20초 안에 갱신되며 새로고침으로 즉시 확인할 수 있습니다. 비밀번호는 소스·문서·배포 파일에 저장하지 않습니다.
