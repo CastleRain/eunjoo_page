@@ -8,3 +8,5 @@ dist/
 *.log
 *.zip
 *.tar.gz
+server/build/
+server/src/generated/

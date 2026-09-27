@@ -53,3 +53,9 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Staff handle herb intake and material reservation. OWNER can also perform these operations. Owner business/finance views and leave decisions remain OWNER-only.
 - Keep the current leave calculation: inclusive start/end calendar dates, including weekends and public holidays; morning/afternoon half-day is 0.5. Do not silently switch to business-day calculations. Retain approval/cancellation/calendar privacy rules.
 - Proceed incrementally toward TypeScript and the planned NestJS/PostgreSQL/Prisma backend. Keep the publicly deployed prototype operational and clearly distinguish connected features from backend groundwork.
+
+## Service foundation status, 2026-09-27
+- Reviewed UI is published from main. Subsequent groundwork is on codex/service-foundation.
+- TypeScript migration is incremental: entry/theme/design tokens and shared rules are typed; most business UI remains JSX. Run npm run typecheck, npm test and npm run build.
+- server/ is an npm workspace with NestJS health-only API and Prisma PostgreSQL account/leave models. Run npm run db:validate, npm run build:api and npm run test:api for changes there. Use Node 22.12+ or Node 24 LTS.
+- Authentication, DB migrations/persistence and business API routes are not connected yet. Do not represent policy helpers as an enforced server security boundary or the health endpoint as database readiness.

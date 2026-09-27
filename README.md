@@ -8,14 +8,18 @@
 
 ## 현재 구현
 
-React 19 + Vite + Ant Design 6 + Day.js를 사용합니다. Noto Sans KR Variable, Lucide 아이콘, Motion을 포함합니다. 공용 UI는 `src/ui.jsx`, 테마는 `src/Theme.jsx`, 공통 색상은 `src/design-config.js`에서 관리합니다. 확정된 A 레이아웃에 흰색·연한 갈색을 적용했습니다.
+React 19 + Vite + Ant Design 6 + Day.js를 사용합니다. Noto Sans KR Variable, Lucide 아이콘, Motion을 포함합니다. 공용 UI는 `src/ui.jsx`, 테마는 `src/Theme.tsx`, 공통 색상은 `src/design-config.ts`에서 관리합니다. 확정된 A 레이아웃에 흰색·연한 갈색을 적용했습니다.
 
-현재는 가상 데이터로 동작하는 프론트엔드 시안입니다. 실제 로그인, 서버 권한, DB, 결제, 메시지 발송은 구현하지 않았습니다. 업무 데이터는 새로고침 시 초기화되고 화면 설정만 브라우저에 저장됩니다.
+현재는 가상 데이터로 동작하는 프론트엔드 시안입니다. 실제 로그인, 서버 권한 강제 적용, DB 저장, 결제, 메시지 발송은 연결하지 않았습니다. 업무 데이터는 새로고침 시 초기화되고 화면 설정만 브라우저에 저장됩니다.
+
+개발 브랜치에서 TypeScript를 점진 도입했습니다. 진입점·테마·색상·공통 업무 규칙을 전환했으며 대부분의 업무 화면은 아직 JSX입니다. `server/`에 NestJS 상태 확인 서버와 Prisma 계정·휴가 모델을 구성했습니다. 상태 확인 응답은 서버 프로세스의 기동 여부만 나타내며 DB나 실제 업무 기능의 준비 완료를 뜻하지 않습니다.
 
 ## 구조
 
 ```text
 src/                  화면, 공용 UI, 테마, 시연 데이터
+shared/               프론트·서버 공용 TypeScript 업무 규칙
+server/               NestJS 기반, Prisma 모델 (업무 API/DB 연결 전)
 public/               배포할 정적 자료
 .github/workflows/    main 푸시 시 GitHub Pages 자동 배포
 tests/                휴가 일수 및 정적 배포 테스트
@@ -26,12 +30,13 @@ scripts/, worker/     기존 Sites 호환 패키징 (업무 API 서버 아님)
 
 ## 개발 및 검증
 
-Node.js 22 이상을 사용합니다.
+Node.js 22.12 이상 또는 24 LTS를 사용합니다.
 
 ```sh
 npm ci
 npm run dev -- --host 127.0.0.1 --port 5173
 npm run build
+npm run typecheck
 npm test
 ```
 
@@ -52,7 +57,10 @@ npm run preview -- --host 127.0.0.1 --port 4173
 
 ## 실서비스 전환
 
-현재 UI를 유지하며 TypeScript와 API 데이터 계층을 단계적으로 도입하고, 별도 NestJS 서버 + PostgreSQL + Prisma를 연결하는 구성이 기존 설계안입니다. GitHub Pages에는 정적 프론트엔드만 배포하며, 업무 API와 DB는 별도 서버에서 운영해야 합니다. 먼저 로그인·서버 권한·휴가 신청/승인 흐름을 연결하는 순서를 제안합니다. 이번 배포에는 백엔드를 추가하지 않았습니다.
+TypeScript와 NestJS·Prisma의 기반 구성을 시작했습니다. GitHub Pages에는 정적 프론트엔드만 배포하며, 업무 API와 DB는 별도 서버에서 운영해야 합니다. 다음 구현은 PostgreSQL 연결, 로그인·서버 권한, 휴가 신청/승인 흐름입니다. 공개 디자인 배포에는 백엔드를 포함하지 않았습니다.
+
+- [확정된 업무 기준](docs/implementation-decisions.md)
+- [백엔드 기반 구성과 구현 범위](server/README.md)
 
 - [실개발 구성안](architecture.md)
 - [상세 구성·범위](design-notes.md)

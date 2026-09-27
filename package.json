@@ -8,7 +8,13 @@
     "build": "vite build && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
     "test:sites": "node --test tests/sites-worker.test.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --import tsx --test tests/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "build:api": "npm run build --workspace @ondam/api",
+    "start:api": "npm run start --workspace @ondam/api",
+    "db:generate": "npm run db:generate --workspace @ondam/api",
+    "db:validate": "npm run db:validate --workspace @ondam/api",
+    "test:api": "npm run test --workspace @ondam/api"
   },
   "dependencies": {
     "@fontsource-variable/noto-sans-kr": "5.3.0",
@@ -23,5 +29,15 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "workspaces": [
+    "server"
+  ],
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "tsx": "4.21.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/node": "^22.0.0"
   }
 }

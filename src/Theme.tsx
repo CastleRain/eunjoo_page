@@ -5,7 +5,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import {design} from './design-config';
 dayjs.locale('ko');
-export function ClinicTheme({font,motion,children}) {
+type ClinicThemeProps = { font: number; motion: boolean; children: React.ReactNode };
+export function ClinicTheme({font,motion,children}: ClinicThemeProps) {
  const compact=font<=16;
  return <ConfigProvider locale={koKR} componentSize="large" theme={{
   token:{

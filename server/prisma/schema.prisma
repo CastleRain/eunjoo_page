@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  OWNER
+  STAFF
+}
+
+enum LeaveType {
+  ANNUAL
+  HALF_AM
+  HALF_PM
+  SICK
+  OTHER
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WITHDRAWN
+  CANCEL_PENDING
+  CANCELLED
+}
+
+model User {
+  id String @id @default(uuid()) @db.Uuid
+  loginId String @unique
+  displayName String
+  passwordHash String
+  role Role @default(STAFF)
+  active Boolean @default(true)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  sessions Session[]
+  leaveRequests LeaveRequest[]
+  leaveDecisions LeaveDecision[]
+}
+
+model Session {
+  id String @id @default(uuid()) @db.Uuid
+  tokenHash String @unique
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt DateTime @db.Timestamptz(3)
+  revokedAt DateTime? @db.Timestamptz(3)
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model LeaveRequest {
+  id String @id @default(uuid()) @db.Uuid
+  applicantId String @db.Uuid
+  applicant User @relation(fields: [applicantId], references: [id], onDelete: Restrict)
+  type LeaveType
+  startDate DateTime @db.Date
+  endDate DateTime @db.Date
+  days Decimal @db.Decimal(6, 1)
+  status LeaveStatus @default(PENDING)
+  reason String? @db.VarChar(1000)
+  handover String? @db.VarChar(1000)
+  version Int @default(0)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  decisions LeaveDecision[]
+  @@index([applicantId, createdAt])
+  @@index([status, startDate, endDate])
+}
+
+model LeaveDecision {
+  id String @id @default(uuid()) @db.Uuid
+  requestId String @db.Uuid
+  request LeaveRequest @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  reviewerId String @db.Uuid
+  reviewer User @relation(fields: [reviewerId], references: [id], onDelete: Restrict)
+  previousStatus LeaveStatus
+  nextStatus LeaveStatus
+  comment String? @db.VarChar(1000)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  @@index([requestId, createdAt])
+}
