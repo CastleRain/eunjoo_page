@@ -10,7 +10,7 @@
 
 React 19 + Vite + Ant Design 6 + Day.js를 사용합니다. Noto Sans KR Variable, Lucide 아이콘, Motion을 포함합니다. 공용 UI는 `src/ui.jsx`, 테마는 `src/Theme.tsx`, 공통 색상은 `src/design-config.ts`에서 관리합니다. 확정된 A 레이아웃에 흰색·연한 갈색을 적용했습니다.
 
-현재는 가상 데이터로 동작하는 프론트엔드 시안입니다. 실제 로그인, 서버 권한 강제 적용, DB 저장, 결제, 메시지 발송은 연결하지 않았습니다. 업무 데이터는 새로고침 시 초기화되고 화면 설정만 브라우저에 저장됩니다.
+기본 화면은 가상 데이터 시안입니다. `?mode=live`에는 Supabase 직원 로그인과 DB에 저장되는 휴가 신청·승인·공유 달력을 구현했습니다. 실제 계정을 등록한 뒤 통합 검증 및 배포를 진행합니다. 다른 CRM 기능·재고·결제·메시지 발송은 아직 DB에 연결하지 않았습니다. 시안 데이터는 새로고침 시 초기화됩니다.
 
 개발 브랜치에서 TypeScript를 점진 도입했습니다. 진입점·테마·색상·공통 업무 규칙을 전환했으며 대부분의 업무 화면은 아직 JSX입니다. `server/`에 NestJS 상태 확인 서버와 Prisma 계정·휴가 모델을 구성했습니다. 상태 확인 응답은 서버 프로세스의 기동 여부만 나타내며 DB나 실제 업무 기능의 준비 완료를 뜻하지 않습니다.
 
@@ -57,7 +57,7 @@ npm run preview -- --host 127.0.0.1 --port 4173
 
 ## 실서비스 전환
 
-TypeScript와 NestJS·Prisma의 기반 구성을 시작했습니다. GitHub Pages에는 정적 프론트엔드만 배포하며, 업무 API와 DB는 별도 서버에서 운영해야 합니다. 다음 구현은 PostgreSQL 연결, 로그인·서버 권한, 휴가 신청/승인 흐름입니다. 공개 디자인 배포에는 백엔드를 포함하지 않았습니다.
+공동 테스트는 GitHub Pages + Supabase Auth/PostgreSQL 조합을 사용합니다. NestJS·Prisma 기반은 향후 별도 서버 업무용으로 보존하며 현재 휴가 기능에서 사용하지 않습니다. 연결 설정, 계정 등록, 권한 모델과 검증 범위는 [Supabase 설정 안내](docs/supabase-setup.md)를 확인하세요.
 
 - [확정된 업무 기준](docs/implementation-decisions.md)
 - [백엔드 기반 구성과 구현 범위](server/README.md)

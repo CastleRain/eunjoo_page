@@ -1,0 +1,10 @@
+.cloud-app{min-height:100vh;background:var(--canvas);color:var(--ink)}
+.cloud-header{display:flex;gap:1rem;align-items:center;padding:1rem 2rem;border-bottom:1px solid var(--line);background:white;flex-wrap:wrap}
+.cloud-brand{font-size:1.4rem;font-weight:700;letter-spacing:-.06em}.cloud-header-actions{display:flex;align-items:center;gap:.5rem;margin-left:auto;flex-wrap:wrap}
+.cloud-login{max-width:28rem;margin:4rem auto;padding:1rem}.cloud-login .ant-form{margin-top:1.6rem}.cloud-login p{margin:.8rem 0;font-size:.9rem}
+.cloud-login .ant-alert{margin-bottom:1rem}.cloud-main{max-width:1440px;padding:2rem;margin:auto}.cloud-loading{padding:5rem;text-align:center}.cloud-loading p{margin-top:1rem}
+.cloud-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}.cloud-metrics span,.cloud-metrics small{display:block;color:var(--muted);font-size:.84rem}.cloud-metrics strong{display:flex;gap:.4rem;align-items:baseline;font-size:2rem}.cloud-metrics b{display:block;margin:.6rem 0}
+.cloud-content{margin-bottom:1rem}.cloud-toolbar{display:flex;gap:1rem;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap}.cloud-toolbar>span{font-size:.8rem}
+.cloud-calendar-event{background:var(--soft);color:var(--ink);border-radius:8px;padding:.45rem;margin:.25rem 0;font-size:.76rem;white-space:normal}.cloud-calendar-event small{display:block}.cloud-footnote{font-size:.8rem;color:var(--muted);margin:1rem 0}
+.cloud-form-dates{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.cloud-form-dates .ant-picker{width:100%}.cloud-history{padding-left:1.2rem}.cloud-history li{margin:1rem 0}.cloud-history small{display:block;color:var(--muted)}.cloud-app .ant-btn{min-height:44px}
+@media(max-width:740px){.cloud-header{padding:1rem}.cloud-header-actions{width:100%;margin:0}.cloud-main{padding:1.2rem .7rem}.cloud-login{margin:1.5rem .7rem;padding:0}.cloud-metrics{grid-template-columns:1fr}.cloud-content .ant-card-body{padding:.7rem}.cloud-form-dates{grid-template-columns:1fr}.cloud-loading{padding:3rem 1rem}}

@@ -58,4 +58,16 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Reviewed UI is published from main. Subsequent groundwork is on codex/service-foundation.
 - TypeScript migration is incremental: entry/theme/design tokens and shared rules are typed; most business UI remains JSX. Run npm run typecheck, npm test and npm run build.
 - server/ is an npm workspace with NestJS health-only API and Prisma PostgreSQL account/leave models. Run npm run db:validate, npm run build:api and npm run test:api for changes there. Use Node 22.12+ or Node 24 LTS.
-- Authentication, DB migrations/persistence and business API routes are not connected yet. Do not represent policy helpers as an enforced server security boundary or the health endpoint as database readiness.
+- At the foundation commit, authentication, DB migrations/persistence and business API routes were not connected. See the later Supabase status below. Do not represent policy helpers as an enforced server security boundary or the health endpoint as database readiness.
+
+## Supabase direction, 2026-09-27
+- User chose GitHub Pages + Supabase Auth/PostgreSQL for shared online testing. This supersedes building custom NestJS session authentication as the immediate next step. Keep existing NestJS foundation for possible later server workflows; do not imply it is deployed or connected.
+- Implement server-enforced OWNER/STAFF authorization with database policies and guarded transactional functions. Start with login and persisted leave requests/approval/calendar; preserve the current prototype and distinguish shared data from demo data.
+- Never ship a Supabase service_role/secret key in frontend code. Use the project's public publishable key and verified DB access policies.
+- User asked to register Supabase together and completed sign-in. In CastleRain's Org (Free), prepared a new ondam-workspace project in Seoul with Data API on, automatic table exposure off, automatic RLS on. User completed creation of ondam-workspace (jjxgyuhwlflhnhxragsn). Existing Yangjeong Coffee is unrelated and must not be modified. Work branch: codex/supabase-leave.
+
+## Supabase implementation status, 2026-09-27
+- Applied supabase/migrations/202609270001_leave.sql to the new remote project through SQL Editor. Private ondam tables have RLS and no direct authenticated access; guarded public RPCs enforce active membership and OWNER/STAFF rules.
+- Added ?mode=live for Supabase login/persisted leave and kept the default prototype as demo. Local public config is ignored in .env.local. No secret/service-role key is used.
+- SQL integration tests run in a disposable Docker PostgreSQL container: npm run test:supabase. Bootstrap fixture files must never be applied to the hosted project.
+- First actual Auth users/profiles and browser end-to-end role tests are pending user account creation. Never treat dashboard login as an app account or infer OWNER from client metadata. GitHub Pages publication of this feature is pending verification.
