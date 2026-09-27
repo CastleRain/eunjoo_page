@@ -8,3 +8,6 @@
 .cloud-calendar-event{background:var(--soft);color:var(--ink);border-radius:8px;padding:.45rem;margin:.25rem 0;font-size:.76rem;white-space:normal}.cloud-calendar-event small{display:block}.cloud-footnote{font-size:.8rem;color:var(--muted);margin:1rem 0}
 .cloud-form-dates{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.cloud-form-dates .ant-picker{width:100%}.cloud-history{padding-left:1.2rem}.cloud-history li{margin:1rem 0}.cloud-history small{display:block;color:var(--muted)}.cloud-app .ant-btn{min-height:44px}
 @media(max-width:740px){.cloud-header{padding:1rem}.cloud-header-actions{width:100%;margin:0}.cloud-main{padding:1.2rem .7rem}.cloud-login{margin:1.5rem .7rem;padding:0}.cloud-metrics{grid-template-columns:1fr}.cloud-content .ant-card-body{padding:.7rem}.cloud-form-dates{grid-template-columns:1fr}.cloud-loading{padding:3rem 1rem}}
+
+.workspace-status{margin-bottom:1.2rem;font-size:.82rem}.cloud-leave{min-width:0}.cloud-leave .cloud-content .ant-card-body{padding:1.2rem}.cloud-leave .calendar-scroll{max-width:100%;overflow-x:auto}
+.workspace-status.ant-alert{background:var(--softest);border:1px solid var(--line);color:var(--muted)}.workspace-status .ant-alert-icon{color:var(--muted)}

@@ -76,3 +76,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - User explicitly approved deployment (main merge, push and GitHub Pages) after the previous automatic approval block.
 - Every entry point, including default URL, ?mode=live, ?mode=demo and hash routes, must require login and active server-verified membership before showing app content. No anonymous demo or configuration-fallback bypass.
 - Staff remain STAFF in the prototype too; no owner-role switch or owner walkthrough is exposed to staff. Preserve owner preview controls.
+
+## Unified workspace, 2026-09-27
+- User requested all existing menu pages in the logged-in app. Show the full shared sidebar and Today landing page after authentication; integrate the real saved leave page into the staff/leave route.
+- Preserve existing CRM/inventory/demo flows and mark unconnected menus as sample data. Do not imply they persist yet. Owner business stays OWNER-only. Automatic walkthrough uses fake leave data and must never submit real requests.
